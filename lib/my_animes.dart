@@ -1,7 +1,9 @@
+import 'package:anilife_mobile/models/my_animes.dart';
 import 'package:flutter/material.dart';
 import 'package:dynamic_theme/dynamic_theme.dart';
+import 'package:provider/provider.dart';
 
-class MyAnime extends StatelessWidget {
+class MyAnimes extends StatelessWidget {
   void _changeBrightness(context) {
     _isBrightnessLight(context)
         ? DynamicTheme.of(context).setBrightness(Brightness.dark)
@@ -25,11 +27,13 @@ class MyAnime extends StatelessWidget {
                   : Icons.brightness_7,
             ),
             onPressed: () => _changeBrightness(context),
-            tooltip: _isBrightnessLight(context) ? "暗いテーマ" : "明るいテーマ",
+            tooltip: _isBrightnessLight(context) ? "暗いテーマにする" : "明るいテーマにする",
           ),
         ],
       ),
-      // body: ,
+      body: Consumer<MyAnimesModel>(
+        builder: (context, myAnimes, child) => Text(""),
+      ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           Navigator.pushNamed(
