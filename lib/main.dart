@@ -22,7 +22,7 @@ class App extends StatelessWidget {
           theme: theme,
           initialRoute: '/',
           routes: {
-            '/': (context) => MyAnime(title: "マイアニメ"),
+            '/': (context) => MyAnime(),
             '/animes/new': (context) => CreateAnimePage(),
           },
         );
