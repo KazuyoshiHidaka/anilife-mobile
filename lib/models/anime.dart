@@ -9,6 +9,7 @@ class Anime {
 class AnimeSchedule {
   final String broadcaster;
   final DateTime time;
+  final int notifyMinutesAgo;
 
-  AnimeSchedule(this.broadcaster, this.time);
+  AnimeSchedule(this.broadcaster, this.time, this.notifyMinutesAgo);
 }

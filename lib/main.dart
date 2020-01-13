@@ -2,7 +2,7 @@ import 'package:anilife_mobile/models/my_animes.dart';
 import 'package:flutter/material.dart';
 import 'package:dynamic_theme/dynamic_theme.dart';
 import 'package:provider/provider.dart';
-
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'my_animes.dart';
 import 'create_anime.dart';
 
@@ -28,6 +28,12 @@ class App extends StatelessWidget {
         ),
         themedWidgetBuilder: (context, theme) {
           return MaterialApp(
+            localizationsDelegates: [
+              GlobalMaterialLocalizations.delegate,
+            ],
+            supportedLocales: [
+              const Locale('ja'),
+            ],
             title: 'AniLife',
             theme: theme,
             initialRoute: '/',
