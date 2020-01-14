@@ -7,7 +7,7 @@ class DatePickerFormField extends StatefulWidget {
 }
 
 class _DatePickerFormFieldState extends State<DatePickerFormField> {
-  DateTime _dateState = DateTime.now();
+  DateTime _dateState = DateTime.now().add(Duration(days: 1));
 
   String _dateStateValue() {
     if (_dateState.year == DateTime.now().year) {

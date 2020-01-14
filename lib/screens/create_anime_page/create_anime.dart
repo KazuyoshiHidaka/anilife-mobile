@@ -1,4 +1,5 @@
 import 'package:anilife_mobile/screens/create_anime_page/date_picker_form_field.dart';
+import 'package:anilife_mobile/screens/create_anime_page/notify_repeat_interval_form_field.dart';
 import 'package:anilife_mobile/screens/create_anime_page/notify_timing_form_field.dart';
 import 'package:anilife_mobile/screens/create_anime_page/time_picker_form_field.dart';
 import 'package:anilife_mobile/screens/create_anime_page/title_form_field.dart';
@@ -7,6 +8,8 @@ import 'package:flutter/material.dart';
 class CreateAnimePage extends StatelessWidget {
   final _formKey = GlobalKey<FormState>();
   final _scaffoldKey = GlobalKey<ScaffoldState>();
+  static const _dividerIndent = Divider(height: 1, indent: 8);
+  static const _divider = Divider(height: 1);
 
   @override
   Widget build(BuildContext context) {
@@ -48,17 +51,15 @@ class CreateAnimePage extends StatelessWidget {
               ),
               child: TitleFormField(),
             ),
+            _divider,
             DatePickerFormField(),
-            Divider(
-              height: 1,
-              indent: 8,
-            ),
+            _dividerIndent,
             TimePickerFormField(),
-            Divider(
-              height: 1,
-              indent: 8,
-            ),
+            _dividerIndent,
             NotifyTimingFormField(),
+            _dividerIndent,
+            NotifyRepeatIntervalFormField(),
+            _divider,
           ],
         ),
       ),
