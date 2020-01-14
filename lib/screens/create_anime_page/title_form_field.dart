@@ -8,6 +8,7 @@ class TitleFormField extends StatefulWidget {
 class _TitleFormFieldState extends State<TitleFormField> {
   final _titleField = TextEditingController();
 
+  @override
   void dispose() {
     _titleField.dispose();
     super.dispose();

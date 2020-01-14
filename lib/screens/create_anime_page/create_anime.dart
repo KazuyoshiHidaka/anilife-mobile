@@ -1,4 +1,5 @@
 import 'package:anilife_mobile/screens/create_anime_page/date_picker_form_field.dart';
+import 'package:anilife_mobile/screens/create_anime_page/time_picker_form_field.dart';
 import 'package:anilife_mobile/screens/create_anime_page/title_form_field.dart';
 import 'package:flutter/material.dart';
 
@@ -37,15 +38,26 @@ class CreateAnimePage extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            TitleFormField(),
-            SizedBox(
-              height: 20,
+            Padding(
+              padding: EdgeInsets.only(
+                top: 5,
+                left: 8,
+                right: 8,
+                bottom: 20,
+              ),
+              child: TitleFormField(),
             ),
             DatePickerFormField(),
             Divider(
               height: 1,
-              indent: 10,
-            )
+              indent: 8,
+            ),
+            TimePickerFormField(),
+            Divider(
+              height: 1,
+              indent: 8,
+            ),
+            // EveryTimeFormField(),
           ],
         ),
       ),

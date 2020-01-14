@@ -23,7 +23,6 @@ class _DatePickerFormFieldState extends State<DatePickerFormField> {
       initialValue: _dateStateValue(),
       builder: (state) {
         return FlatButton(
-          padding: EdgeInsets.all(0),
           onPressed: () async {
             DateTime selectedDate = await showDatePicker(
               context: context,
@@ -51,6 +50,7 @@ class _DatePickerFormFieldState extends State<DatePickerFormField> {
               vertical: 0,
             ),
           ),
+          padding: EdgeInsets.all(0),
         );
       },
     );
