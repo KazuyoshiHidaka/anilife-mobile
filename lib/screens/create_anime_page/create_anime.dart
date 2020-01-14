@@ -1,4 +1,5 @@
 import 'package:anilife_mobile/screens/create_anime_page/date_picker_form_field.dart';
+import 'package:anilife_mobile/screens/create_anime_page/notify_timing_form_field.dart';
 import 'package:anilife_mobile/screens/create_anime_page/time_picker_form_field.dart';
 import 'package:anilife_mobile/screens/create_anime_page/title_form_field.dart';
 import 'package:flutter/material.dart';
@@ -57,7 +58,7 @@ class CreateAnimePage extends StatelessWidget {
               height: 1,
               indent: 8,
             ),
-            // EveryTimeFormField(),
+            NotifyTimingFormField(),
           ],
         ),
       ),

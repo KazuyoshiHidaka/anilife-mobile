@@ -20,7 +20,7 @@ class TimePickerFormField extends StatelessWidget {
           },
           child: ListTile(
             title: Text(
-              "時刻",
+              "視聴する時刻",
             ),
             subtitle: Text(
               "${state.value}",
