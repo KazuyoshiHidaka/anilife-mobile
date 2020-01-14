@@ -1,10 +1,10 @@
 import 'package:anilife_mobile/models/my_animes.dart';
+import 'package:anilife_mobile/screens/my_animes_page/my_animes.dart';
+import 'package:anilife_mobile/screens/create_anime_page/create_anime.dart';
 import 'package:flutter/material.dart';
 import 'package:dynamic_theme/dynamic_theme.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'my_animes.dart';
-import 'create_anime.dart';
 
 void main() {
   runApp(App());

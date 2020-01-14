@@ -32,7 +32,9 @@ class MyAnimes extends StatelessWidget {
         ],
       ),
       body: Consumer<MyAnimesModel>(
-        builder: (context, myAnimes, child) => Text(""),
+        builder: (context, myAnimes, child) => ListView.builder(
+          itemBuilder: (context, index) => ListTile(),
+        ),
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {

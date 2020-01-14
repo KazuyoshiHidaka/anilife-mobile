@@ -5,10 +5,14 @@ class MyAnimesModel extends ChangeNotifier {
   final List<Anime> _myAnimes = [];
 
   Anime getById(int id) => _myAnimes.firstWhere((anime) => anime.id == id);
-  List<Anime> get animes => _myAnimes;
 
   void add(Anime anime) {
     _myAnimes.add(anime);
+    notifyListeners();
+  }
+
+  void remove(int id) {
+    _myAnimes.remove(getById(id));
     notifyListeners();
   }
 }
