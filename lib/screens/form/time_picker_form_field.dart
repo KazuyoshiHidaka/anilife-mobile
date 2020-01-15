@@ -4,13 +4,13 @@ class TimePickerFormField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return FormField(
-      initialValue: TimeOfDay(hour: 0, minute: 0).format(context),
+      initialValue: const TimeOfDay(hour: 0, minute: 0).format(context),
       builder: (state) {
         return FlatButton(
           onPressed: () async {
             TimeOfDay selectedTime = await showTimePicker(
               context: context,
-              initialTime: TimeOfDay(hour: 0, minute: 0),
+              initialTime: const TimeOfDay(hour: 0, minute: 0),
             );
             if (selectedTime != null) {
               state.didChange(
@@ -19,18 +19,18 @@ class TimePickerFormField extends StatelessWidget {
             }
           },
           child: ListTile(
-            title: Text(
+            title: const Text(
               "視聴する時刻",
             ),
             subtitle: Text(
               "${state.value}",
             ),
-            contentPadding: EdgeInsets.symmetric(
+            contentPadding: const EdgeInsets.symmetric(
               horizontal: 8,
               vertical: 0,
             ),
           ),
-          padding: EdgeInsets.all(0),
+          padding: const EdgeInsets.all(0),
         );
       },
     );

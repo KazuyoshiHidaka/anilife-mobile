@@ -31,8 +31,8 @@ class App extends StatelessWidget {
             localizationsDelegates: [
               GlobalMaterialLocalizations.delegate,
             ],
-            supportedLocales: [
-              const Locale('ja'),
+            supportedLocales: const [
+              Locale('ja'),
             ],
             title: 'AniLife',
             theme: theme,

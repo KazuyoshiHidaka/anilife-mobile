@@ -36,7 +36,7 @@ class _AnimeFormState extends State<AnimeForm> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           Padding(
-            padding: EdgeInsets.only(
+            padding: const EdgeInsets.only(
               top: 5,
               left: 8,
               right: 8,

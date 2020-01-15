@@ -7,7 +7,7 @@ class DatePickerFormField extends StatefulWidget {
 }
 
 class _DatePickerFormFieldState extends State<DatePickerFormField> {
-  DateTime _dateState = DateTime.now().add(Duration(days: 1));
+  DateTime _dateState = DateTime.now().add(const Duration(days: 1));
 
   String _dateStateValue() {
     if (_dateState.year == DateTime.now().year) {
@@ -26,10 +26,10 @@ class _DatePickerFormFieldState extends State<DatePickerFormField> {
           onPressed: () async {
             DateTime selectedDate = await showDatePicker(
               context: context,
-              firstDate: DateTime.now().subtract(Duration(days: 1)),
+              firstDate: DateTime.now().subtract(const Duration(days: 1)),
               initialDate: _dateState,
               lastDate: DateTime(9999),
-              locale: Locale("ja"),
+              locale: const Locale("ja"),
             );
             if (selectedDate != null) {
               _dateState = selectedDate;
@@ -39,18 +39,18 @@ class _DatePickerFormFieldState extends State<DatePickerFormField> {
             }
           },
           child: ListTile(
-            title: Text(
+            title: const Text(
               "視聴する日付",
             ),
             subtitle: Text(
               "${state.value}",
             ),
-            contentPadding: EdgeInsets.symmetric(
+            contentPadding: const EdgeInsets.symmetric(
               horizontal: 8,
               vertical: 0,
             ),
           ),
-          padding: EdgeInsets.all(0),
+          padding: const EdgeInsets.all(0),
         );
       },
     );

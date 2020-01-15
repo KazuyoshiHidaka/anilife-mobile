@@ -4,21 +4,21 @@ import 'package:dynamic_theme/dynamic_theme.dart';
 import 'package:provider/provider.dart';
 
 class MyAnimes extends StatelessWidget {
-  void _changeBrightness(context) {
+  void _changeBrightness(BuildContext context) {
     _isBrightnessLight(context)
         ? DynamicTheme.of(context).setBrightness(Brightness.dark)
         : DynamicTheme.of(context).setBrightness(Brightness.light);
   }
 
-  bool _isBrightnessLight(context) {
+  bool _isBrightnessLight(BuildContext context) {
     return DynamicTheme.of(context).brightness == Brightness.light;
   }
 
   @override
   Widget build(BuildContext context) {
-    return new Scaffold(
+    return Scaffold(
       appBar: AppBar(
-        title: Text("マイアニメ"),
+        title: const Text("マイアニメ"),
         actions: [
           IconButton(
             icon: Icon(
@@ -33,7 +33,7 @@ class MyAnimes extends StatelessWidget {
       ),
       body: Consumer<MyAnimesModel>(
         builder: (context, myAnimes, child) => ListView.builder(
-          itemBuilder: (context, index) => ListTile(),
+          itemBuilder: (context, index) => const ListTile(),
         ),
       ),
       floatingActionButton: FloatingActionButton(

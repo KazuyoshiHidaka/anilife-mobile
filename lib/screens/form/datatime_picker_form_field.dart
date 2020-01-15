@@ -40,7 +40,7 @@ class _DateTimePickerFormFieldState extends State<DateTimePickerFormField> {
       builder: (state) {
         return FlatButton(
           onPressed: () async {
-            DatePicker.showDateTimePicker(
+            await DatePicker.showDateTimePicker(
               context,
               minTime: DateTime.now(),
               currentTime: _dateTimeState,
@@ -52,18 +52,18 @@ class _DateTimePickerFormFieldState extends State<DateTimePickerFormField> {
             );
           },
           child: ListTile(
-            title: Text(
+            title: const Text(
               "視聴する日時",
             ),
             subtitle: Text(
               "${state.value}",
             ),
-            contentPadding: EdgeInsets.symmetric(
+            contentPadding: const EdgeInsets.symmetric(
               horizontal: 8,
               vertical: 0,
             ),
           ),
-          padding: EdgeInsets.all(0),
+          padding: const EdgeInsets.all(0),
         );
       },
     );

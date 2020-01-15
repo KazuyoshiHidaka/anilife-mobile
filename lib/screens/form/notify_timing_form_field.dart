@@ -6,7 +6,7 @@ class NotifyTimingFormField extends StatelessWidget {
   Widget build(BuildContext context) {
     return FormField(
       initialValue: 5,
-      builder: (state) {
+      builder: (FormFieldState<int> state) {
         return FlatButton(
           onPressed: () {
             Picker(
@@ -20,18 +20,18 @@ class NotifyTimingFormField extends StatelessWidget {
             ).showDialog(context);
           },
           child: ListTile(
-            title: Text(
+            title: const Text(
               "通知タイミング",
             ),
             subtitle: Text(
               "${state.value}分前",
             ),
-            contentPadding: EdgeInsets.symmetric(
+            contentPadding: const EdgeInsets.symmetric(
               horizontal: 8,
               vertical: 0,
             ),
           ),
-          padding: EdgeInsets.all(0),
+          padding: const EdgeInsets.all(0),
         );
       },
     );
