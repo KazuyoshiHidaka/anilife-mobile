@@ -10,32 +10,34 @@ class DateTimePickerFormField extends StatefulWidget {
 
 class _DateTimePickerFormFieldState extends State<DateTimePickerFormField> {
   DateTime _dateTimeState = DateTime.now();
+  String _date;
 
   String _datetimeFormat(DateTime datetime) {
-    var _date;
     if (datetime.year == DateTime.now().year) {
-      _date = DateFormat.MMMEd("ja").format(datetime);
+      _date = DateFormat.MMMEd('ja').format(datetime);
     } else {
-      _date = DateFormat.yMMMEd("ja").format(datetime);
+      _date = DateFormat.yMMMEd('ja').format(datetime);
     }
-    return "$_date  " + DateFormat.Hm("ja").format(datetime);
+    return '$_date  ${DateFormat.Hm('ja').format(datetime)}';
   }
 
   String _dateTimeValidator() {
-    return _dateTimeState.isBefore(DateTime.now()) ? "\n現在より前の日時は指定できません" : "";
+    return _dateTimeState.isBefore(DateTime.now()) ? '\n現在より前の日時は指定できません' : '';
   }
 
   @override
   Widget build(BuildContext context) {
     return FormField(
       initialValue: _datetimeFormat(_dateTimeState),
-      validator: (_) {
-        String _validate = _dateTimeValidator();
+      validator: (dynamic v) {
+        var _validate = _dateTimeValidator();
         if (_validate.isNotEmpty) {
           // Scaffold.of(context).showSnackBar(SnackBar(
-          //   content: Text(""),
+          //   content: Text(''),
           // ));
+          _validate = null;
         }
+        return _validate;
       },
       builder: (state) {
         return FlatButton(
@@ -53,10 +55,10 @@ class _DateTimePickerFormFieldState extends State<DateTimePickerFormField> {
           },
           child: ListTile(
             title: const Text(
-              "視聴する日時",
+              '視聴する日時',
             ),
             subtitle: Text(
-              "${state.value}",
+              '${state.value}',
             ),
             contentPadding: const EdgeInsets.symmetric(
               horizontal: 8,

@@ -10,7 +10,7 @@ class CreateAnimePage extends StatelessWidget {
     return Scaffold(
       key: _scaffoldKey,
       appBar: AppBar(
-        title: const Text("アニメを登録"),
+        title: const Text('アニメを登録'),
         actions: <Widget>[
           IconButton(
             icon: Icon(Icons.check),
@@ -19,14 +19,14 @@ class CreateAnimePage extends StatelessWidget {
                 Scaffold.of(context).showSnackBar(
                   const SnackBar(
                     content: Text(
-                      "アニメを登録しました",
+                      'アニメを登録しました',
                     ),
                   ),
                 );
                 _formKey.currentState.save();
               }
             },
-            tooltip: "登録",
+            tooltip: '登録',
           ),
         ],
       ),

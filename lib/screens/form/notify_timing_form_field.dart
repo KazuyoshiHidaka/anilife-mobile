@@ -6,7 +6,9 @@ class NotifyTimingFormField extends StatelessWidget {
   Widget build(BuildContext context) {
     return FormField(
       initialValue: 5,
-      builder: (FormFieldState<int> state) {
+      builder: (
+        FormFieldState<int> state, // ignore: avoid_types_on_closure_parameters
+      ) {
         return FlatButton(
           onPressed: () {
             Picker(
@@ -21,10 +23,10 @@ class NotifyTimingFormField extends StatelessWidget {
           },
           child: ListTile(
             title: const Text(
-              "通知タイミング",
+              '通知タイミング',
             ),
             subtitle: Text(
-              "${state.value}分前",
+              '${state.value}分前',
             ),
             contentPadding: const EdgeInsets.symmetric(
               horizontal: 8,

@@ -8,7 +8,7 @@ class TimePickerFormField extends StatelessWidget {
       builder: (state) {
         return FlatButton(
           onPressed: () async {
-            TimeOfDay selectedTime = await showTimePicker(
+            final selectedTime = await showTimePicker(
               context: context,
               initialTime: const TimeOfDay(hour: 0, minute: 0),
             );
@@ -20,10 +20,10 @@ class TimePickerFormField extends StatelessWidget {
           },
           child: ListTile(
             title: const Text(
-              "視聴する時刻",
+              '視聴する時刻',
             ),
             subtitle: Text(
-              "${state.value}",
+              '${state.value}',
             ),
             contentPadding: const EdgeInsets.symmetric(
               horizontal: 8,

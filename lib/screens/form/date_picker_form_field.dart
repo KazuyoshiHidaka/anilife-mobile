@@ -11,9 +11,9 @@ class _DatePickerFormFieldState extends State<DatePickerFormField> {
 
   String _dateStateValue() {
     if (_dateState.year == DateTime.now().year) {
-      return DateFormat.MMMEd("ja").format(_dateState);
+      return DateFormat.MMMEd('ja').format(_dateState);
     } else {
-      return DateFormat.yMMMEd("ja").format(_dateState);
+      return DateFormat.yMMMEd('ja').format(_dateState);
     }
   }
 
@@ -24,12 +24,12 @@ class _DatePickerFormFieldState extends State<DatePickerFormField> {
       builder: (state) {
         return FlatButton(
           onPressed: () async {
-            DateTime selectedDate = await showDatePicker(
+            final selectedDate = await showDatePicker(
               context: context,
               firstDate: DateTime.now().subtract(const Duration(days: 1)),
               initialDate: _dateState,
               lastDate: DateTime(9999),
-              locale: const Locale("ja"),
+              locale: const Locale('ja'),
             );
             if (selectedDate != null) {
               _dateState = selectedDate;
@@ -40,10 +40,10 @@ class _DatePickerFormFieldState extends State<DatePickerFormField> {
           },
           child: ListTile(
             title: const Text(
-              "視聴する日付",
+              '視聴する日付',
             ),
             subtitle: Text(
-              "${state.value}",
+              '${state.value}',
             ),
             contentPadding: const EdgeInsets.symmetric(
               horizontal: 8,

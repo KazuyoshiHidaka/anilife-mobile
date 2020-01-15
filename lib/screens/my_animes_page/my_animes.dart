@@ -18,7 +18,7 @@ class MyAnimes extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("マイアニメ"),
+        title: const Text('マイアニメ'),
         actions: [
           IconButton(
             icon: Icon(
@@ -27,7 +27,7 @@ class MyAnimes extends StatelessWidget {
                   : Icons.brightness_7,
             ),
             onPressed: () => _changeBrightness(context),
-            tooltip: _isBrightnessLight(context) ? "暗いテーマにする" : "明るいテーマにする",
+            tooltip: _isBrightnessLight(context) ? '暗いテーマにする' : '明るいテーマにする',
           ),
         ],
       ),
@@ -44,7 +44,7 @@ class MyAnimes extends StatelessWidget {
           );
         },
         child: Icon(Icons.add),
-        tooltip: "アニメを登録",
+        tooltip: 'アニメを登録',
       ),
     );
   }

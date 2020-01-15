@@ -20,7 +20,7 @@ class _TitleFormFieldState extends State<TitleFormField> {
       controller: _titleField,
       maxLength: 50,
       decoration: InputDecoration(
-        labelText: "タイトル",
+        labelText: 'タイトル',
         suffixIcon: IconButton(
           onPressed: () {
             /// [flutter bug]
@@ -29,11 +29,11 @@ class _TitleFormFieldState extends State<TitleFormField> {
             );
           },
           icon: Icon(Icons.clear),
-          tooltip: "削除",
+          tooltip: '削除',
         ),
       ),
-      validator: (String value) {
-        return value.isEmpty ? "タイトルを入力して下さい" : null;
+      validator: (value) {
+        return value.isEmpty ? 'タイトルを入力して下さい' : null;
       },
     );
   }
