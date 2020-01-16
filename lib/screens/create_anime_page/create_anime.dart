@@ -2,35 +2,42 @@ import 'package:anilife_mobile/screens/form/anime_form.dart';
 import 'package:flutter/material.dart';
 
 class CreateAnimePage extends StatelessWidget {
-  final _formKey = GlobalKey<FormState>();
-  final _scaffoldKey = GlobalKey<ScaffoldState>();
-
+  CreateAnimePage({@required Text title}) : _title = title;
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  final Text _title;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      key: _scaffoldKey,
       appBar: AppBar(
-        title: const Text('アニメを登録'),
+        title: _title,
         actions: <Widget>[
-          IconButton(
-            icon: Icon(Icons.check),
-            onPressed: () {
-              if (_formKey.currentState.validate()) {
-                Scaffold.of(context).showSnackBar(
-                  const SnackBar(
-                    content: Text(
-                      'アニメを登録しました',
-                    ),
-                  ),
-                );
-                _formKey.currentState.save();
-              }
+          Builder(
+            builder: (context) {
+              return IconButton(
+                icon: Icon(Icons.check),
+                tooltip: '登録',
+                onPressed: () {
+                  final _form = _formKey.currentState;
+                  if (_form.validate()) {
+                    Scaffold.of(context).showSnackBar(
+                      const SnackBar(
+                        content: Text(
+                          'アニメを登録しました',
+                        ),
+                      ),
+                    );
+                    _form.save();
+                  }
+                },
+              );
             },
-            tooltip: '登録',
-          ),
+          )
         ],
       ),
-      body: AnimeForm(formKey: _formKey),
+      body: AnimeForm(
+        formKey: _formKey,
+        child: const AnimeFormFields(),
+      ),
     );
   }
 }

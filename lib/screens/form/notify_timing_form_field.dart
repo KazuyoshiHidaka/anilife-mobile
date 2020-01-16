@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_picker/flutter_picker.dart';
 
 class NotifyTimingFormField extends StatelessWidget {
+  const NotifyTimingFormField();
   @override
   Widget build(BuildContext context) {
     return FormField(

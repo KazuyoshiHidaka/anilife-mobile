@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 class TitleFormField extends StatefulWidget {
+  const TitleFormField();
   @override
   _TitleFormFieldState createState() => _TitleFormFieldState();
 }
@@ -23,7 +24,6 @@ class _TitleFormFieldState extends State<TitleFormField> {
         labelText: 'タイトル',
         suffixIcon: IconButton(
           onPressed: () {
-            /// [flutter bug]
             WidgetsBinding.instance.addPostFrameCallback(
               (_) => _titleField.clear(),
             );

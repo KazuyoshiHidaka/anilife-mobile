@@ -3,6 +3,7 @@ import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
 import 'package:intl/intl.dart';
 
 class DateTimePickerFormField extends StatefulWidget {
+  const DateTimePickerFormField();
   @override
   _DateTimePickerFormFieldState createState() =>
       _DateTimePickerFormFieldState();
@@ -21,23 +22,20 @@ class _DateTimePickerFormFieldState extends State<DateTimePickerFormField> {
     return '$_date  ${DateFormat.Hm('ja').format(datetime)}';
   }
 
-  String _dateTimeValidator() {
-    return _dateTimeState.isBefore(DateTime.now()) ? '\n現在より前の日時は指定できません' : '';
+  String _errorText() {
+    return _dateTimeState.isBefore(DateTime.now())
+        ? '\n現在より前の日時は指定できません'
+        : null;
   }
 
   @override
   Widget build(BuildContext context) {
     return FormField(
       initialValue: _datetimeFormat(_dateTimeState),
-      validator: (dynamic v) {
-        var _validate = _dateTimeValidator();
-        if (_validate.isNotEmpty) {
-          // Scaffold.of(context).showSnackBar(SnackBar(
-          //   content: Text(''),
-          // ));
-          _validate = null;
-        }
-        return _validate;
+      enabled: false,
+      validator: (_) {
+        if (_errorText() != null) {}
+        return _errorText();
       },
       builder: (state) {
         return FlatButton(
@@ -57,8 +55,17 @@ class _DateTimePickerFormFieldState extends State<DateTimePickerFormField> {
             title: const Text(
               '視聴する日時',
             ),
-            subtitle: Text(
-              '${state.value}',
+            subtitle: Stack(
+              children: [
+                Text(
+                  '${state.value}',
+                ),
+                if (_errorText() != null)
+                  Text(
+                    '${_errorText()}',
+                    style: TextStyle(color: Colors.red),
+                  )
+              ],
             ),
             contentPadding: const EdgeInsets.symmetric(
               horizontal: 8,

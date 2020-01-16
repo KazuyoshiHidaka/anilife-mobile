@@ -5,9 +5,10 @@ import 'package:provider/provider.dart';
 
 class MyAnimes extends StatelessWidget {
   void _changeBrightness(BuildContext context) {
-    _isBrightnessLight(context)
-        ? DynamicTheme.of(context).setBrightness(Brightness.dark)
-        : DynamicTheme.of(context).setBrightness(Brightness.light);
+    Brightness _brightness;
+    _brightness =
+        _isBrightnessLight(context) ? Brightness.dark : Brightness.light;
+    DynamicTheme.of(context).setBrightness(_brightness);
   }
 
   bool _isBrightnessLight(BuildContext context) {

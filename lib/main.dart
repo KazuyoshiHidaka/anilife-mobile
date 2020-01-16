@@ -39,7 +39,8 @@ class App extends StatelessWidget {
             initialRoute: '/',
             routes: {
               '/': (context) => MyAnimes(),
-              '/animes/new': (context) => CreateAnimePage(),
+              '/animes/new': (context) =>
+                  CreateAnimePage(title: const Text('アニメを登録')),
             },
           );
         },
