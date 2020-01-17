@@ -2,14 +2,12 @@ import 'package:anilife_mobile/screens/form/anime_form.dart';
 import 'package:flutter/material.dart';
 
 class CreateAnimePage extends StatelessWidget {
-  CreateAnimePage({@required Text title}) : _title = title;
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-  final Text _title;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: _title,
+        title: const Text('アニメを登録'),
         actions: <Widget>[
           Builder(
             builder: (context) {

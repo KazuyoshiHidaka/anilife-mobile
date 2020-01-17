@@ -10,16 +10,16 @@ class DateTimePickerFormField extends StatefulWidget {
 }
 
 class _DateTimePickerFormFieldState extends State<DateTimePickerFormField> {
-  DateTime _dateTimeState = DateTime.now();
-  String _date;
+  DateTime _dateTimeState;
 
   String _datetimeFormat(DateTime datetime) {
+    DateFormat _date;
     if (datetime.year == DateTime.now().year) {
-      _date = DateFormat.MMMEd('ja').format(datetime);
+      _date = DateFormat.MMMEd('ja');
     } else {
-      _date = DateFormat.yMMMEd('ja').format(datetime);
+      _date = DateFormat.yMMMEd('ja');
     }
-    return '$_date  ${DateFormat.Hm('ja').format(datetime)}';
+    return '${_date.add_Hm().format(datetime)}';
   }
 
   String _errorText() {
@@ -29,12 +29,22 @@ class _DateTimePickerFormFieldState extends State<DateTimePickerFormField> {
   }
 
   @override
+  void initState() {
+    super.initState();
+    final _datetime = DateTime.now();
+    _dateTimeState = DateTime.utc(
+      _datetime.year,
+      _datetime.month,
+      _datetime.add(const Duration(days: 1)).day,
+    ).toLocal();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return FormField(
       initialValue: _datetimeFormat(_dateTimeState),
       enabled: false,
       validator: (_) {
-        if (_errorText() != null) {}
         return _errorText();
       },
       builder: (state) {
