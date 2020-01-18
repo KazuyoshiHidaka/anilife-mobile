@@ -1,6 +1,6 @@
+import 'package:anilife_mobile/models/anime.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
-import 'package:intl/intl.dart';
 
 class DateTimePickerFormField extends StatefulWidget {
   const DateTimePickerFormField();
@@ -11,16 +11,6 @@ class DateTimePickerFormField extends StatefulWidget {
 
 class _DateTimePickerFormFieldState extends State<DateTimePickerFormField> {
   DateTime _dateTimeState;
-
-  String _datetimeFormat(DateTime datetime) {
-    DateFormat _date;
-    if (datetime.year == DateTime.now().year) {
-      _date = DateFormat.MMMEd('ja');
-    } else {
-      _date = DateFormat.yMMMEd('ja');
-    }
-    return '${_date.add_Hm().format(datetime)}';
-  }
 
   String _errorText() {
     return _dateTimeState.isBefore(DateTime.now())
@@ -42,14 +32,14 @@ class _DateTimePickerFormFieldState extends State<DateTimePickerFormField> {
   @override
   Widget build(BuildContext context) {
     return FormField(
-      initialValue: _datetimeFormat(_dateTimeState),
+      initialValue: Anime.dateFormat(_dateTimeState),
       enabled: false,
-      validator: (_) {
+      validator: (dynamic _) {
         return _errorText();
       },
       builder: (state) {
-        return FlatButton(
-          onPressed: () async {
+        return ListTile(
+          onTap: () async {
             await DatePicker.showDateTimePicker(
               context,
               minTime: DateTime.now(),
@@ -57,32 +47,29 @@ class _DateTimePickerFormFieldState extends State<DateTimePickerFormField> {
               locale: LocaleType.jp,
               onConfirm: (value) {
                 _dateTimeState = value;
-                state.didChange(_datetimeFormat(value));
+                state.didChange(Anime.dateFormat(value));
               },
             );
           },
-          child: ListTile(
-            title: const Text(
-              '視聴する日時',
-            ),
-            subtitle: Stack(
-              children: [
-                Text(
-                  '${state.value}',
-                ),
-                if (_errorText() != null)
-                  Text(
-                    '${_errorText()}',
-                    style: TextStyle(color: Colors.red),
-                  )
-              ],
-            ),
-            contentPadding: const EdgeInsets.symmetric(
-              horizontal: 8,
-              vertical: 0,
-            ),
+          title: const Text(
+            '視聴する日時',
           ),
-          padding: const EdgeInsets.all(0),
+          subtitle: Stack(
+            children: [
+              Text(
+                '${state.value}',
+              ),
+              if (_errorText() != null)
+                Text(
+                  '${_errorText()}',
+                  style: TextStyle(color: Colors.red),
+                )
+            ],
+          ),
+          contentPadding: const EdgeInsets.symmetric(
+            horizontal: 8,
+            vertical: 0,
+          ),
         );
       },
     );

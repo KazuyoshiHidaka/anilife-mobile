@@ -10,8 +10,8 @@ class NotifyTimingFormField extends StatelessWidget {
       builder: (
         FormFieldState<int> state, // ignore: avoid_types_on_closure_parameters
       ) {
-        return FlatButton(
-          onPressed: () {
+        return ListTile(
+          onTap: () {
             Picker(
               adapter: NumberPickerAdapter(data: [
                 NumberPickerColumn(begin: 0, end: 60, initValue: state.value),
@@ -22,19 +22,16 @@ class NotifyTimingFormField extends StatelessWidget {
               },
             ).showDialog(context);
           },
-          child: ListTile(
-            title: const Text(
-              '通知タイミング',
-            ),
-            subtitle: Text(
-              '${state.value}分前',
-            ),
-            contentPadding: const EdgeInsets.symmetric(
-              horizontal: 8,
-              vertical: 0,
-            ),
+          title: const Text(
+            '通知タイミング',
           ),
-          padding: const EdgeInsets.all(0),
+          subtitle: Text(
+            '${state.value}分前',
+          ),
+          contentPadding: const EdgeInsets.symmetric(
+            horizontal: 8,
+            vertical: 0,
+          ),
         );
       },
     );
