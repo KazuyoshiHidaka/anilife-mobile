@@ -34,6 +34,9 @@ class MyAnimeOperations extends StatelessWidget {
     return Row(
       children: <Widget>[
         IconButton(
+          iconSize: 20,
+          padding: const EdgeInsets.all(0),
+          alignment: Alignment.topCenter,
           icon: Icon(Icons.edit),
           onPressed: () {
             Navigator.pushNamed(
@@ -45,6 +48,9 @@ class MyAnimeOperations extends StatelessWidget {
           },
         ),
         IconButton(
+          iconSize: 20,
+          padding: const EdgeInsets.all(0),
+          alignment: Alignment.topCenter,
           icon: Icon(Icons.clear),
           onPressed: () {
             _myAnimesModel.remove(anime.id);

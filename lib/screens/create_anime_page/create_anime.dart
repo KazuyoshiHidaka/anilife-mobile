@@ -10,7 +10,6 @@ class CreateAnimePage extends StatelessWidget {
   Widget build(BuildContext context) {
     final _formModel = Provider.of<AnimeFormModel>(context, listen: true);
     final _formKey = _formModel.formKey;
-    final _form = _formKey.currentState;
     final _myAnimesModel = Provider.of<MyAnimesModel>(context, listen: false);
     final dynamic _routeArguments = ModalRoute.of(context).settings.arguments;
     _formModel.setAnime = _routeArguments.anime as Anime;
@@ -24,8 +23,8 @@ class CreateAnimePage extends StatelessWidget {
                 icon: Icon(Icons.check),
                 tooltip: '登録',
                 onPressed: () {
-                  if (_form.validate()) {
-                    _form.save();
+                  if (_formKey.currentState.validate()) {
+                    _formKey.currentState.save();
                     if (_myAnimesModel.getById(_formModel.setAnime.id) ==
                         null) {
                       _myAnimesModel.add(
