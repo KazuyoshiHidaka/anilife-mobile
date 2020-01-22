@@ -1,22 +1,28 @@
+import 'package:anilife_mobile/models/anime_form.dart';
 import 'package:flutter/material.dart';
 import 'package:anilife_mobile/screens/form/datatime_picker_form_field.dart';
 import 'package:anilife_mobile/screens/form/notify_repeat_interval_form_field.dart';
 import 'package:anilife_mobile/screens/form/notify_timing_form_field.dart';
 import 'package:anilife_mobile/screens/form/title_form_field.dart';
+import 'package:provider/provider.dart';
 
-class AnimeForm extends StatelessWidget {
+class AnimeForm extends StatefulWidget {
   const AnimeForm({
-    @required this.formKey,
     @required this.child,
   });
-  final GlobalKey<FormState> formKey;
   final Widget child;
+
+  @override
+  _AnimeFormState createState() => _AnimeFormState();
+}
+
+class _AnimeFormState extends State<AnimeForm> {
   @override
   Widget build(BuildContext context) {
     return Form(
-      key: formKey,
+      key: Provider.of<AnimeFormModel>(context).formKey,
       autovalidate: true,
-      child: child,
+      child: widget.child,
       onChanged: () => print('form change ${DateTime.now()}'),
     );
   }
@@ -32,13 +38,12 @@ class AnimeFormFields extends StatelessWidget {
   const AnimeFormFields();
   static const _dividerIndent = Divider(height: 1, indent: 8);
   static const _divider = Divider(height: 1);
-
   @override
   Widget build(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
-      children: const <Widget>[
-        Padding(
+      children: <Widget>[
+        const Padding(
           padding: EdgeInsets.only(
             top: 5,
             left: 8,
@@ -48,9 +53,9 @@ class AnimeFormFields extends StatelessWidget {
           child: TitleFormField(),
         ),
         _divider,
-        DateTimePickerFormField(),
+        const DateTimePickerFormField(),
         _dividerIndent,
-        NotifyTimingFormField(),
+        const NotifyTimingFormField(),
         _dividerIndent,
         NotifyRepeatIntervalFormField(),
         _divider,

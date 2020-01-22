@@ -1,3 +1,4 @@
+import 'package:anilife_mobile/models/anime_form.dart';
 import 'package:anilife_mobile/models/my_animes.dart';
 import 'package:anilife_mobile/screens/my_animes_page/my_animes.dart';
 import 'package:anilife_mobile/screens/create_anime_page/create_anime.dart';
@@ -17,6 +18,9 @@ class App extends StatelessWidget {
       providers: [
         ChangeNotifierProvider(
           create: (context) => MyAnimesModel(),
+        ),
+        Provider(
+          create: (context) => AnimeFormModel(),
         ),
       ],
       child: DynamicTheme(

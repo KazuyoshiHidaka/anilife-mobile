@@ -1,41 +1,23 @@
 import 'package:anilife_mobile/models/anime.dart';
+import 'package:anilife_mobile/models/anime_form.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
+import 'package:provider/provider.dart';
 
-class DateTimePickerFormField extends StatefulWidget {
+class DateTimePickerFormField extends StatelessWidget {
   const DateTimePickerFormField();
-  @override
-  _DateTimePickerFormFieldState createState() =>
-      _DateTimePickerFormFieldState();
-}
-
-class _DateTimePickerFormFieldState extends State<DateTimePickerFormField> {
-  DateTime _dateTimeState;
-
-  String _errorText() {
-    return _dateTimeState.isBefore(DateTime.now())
-        ? '\n現在より前の日時は指定できません'
-        : null;
-  }
-
-  @override
-  void initState() {
-    super.initState();
-    final _datetime = DateTime.now();
-    _dateTimeState = DateTime.utc(
-      _datetime.year,
-      _datetime.month,
-      _datetime.add(const Duration(days: 1)).day,
-    ).toLocal();
+  String _errorText(DateTime dateTime) {
+    return dateTime.isBefore(DateTime.now()) ? '\n現在より前の日時は指定できません' : null;
   }
 
   @override
   Widget build(BuildContext context) {
-    return FormField(
-      initialValue: Anime.dateFormat(_dateTimeState),
-      enabled: false,
-      validator: (dynamic _) {
-        return _errorText();
+    final _formModel = Provider.of<AnimeFormModel>(context, listen: false);
+    return FormField<DateTime>(
+      initialValue: _formModel.anime.time,
+      validator: _errorText,
+      onSaved: (value) {
+        _formModel.setAnime.time = value;
       },
       builder: (state) {
         return ListTile(
@@ -43,11 +25,12 @@ class _DateTimePickerFormFieldState extends State<DateTimePickerFormField> {
             await DatePicker.showDateTimePicker(
               context,
               minTime: DateTime.now(),
-              currentTime: _dateTimeState,
+              currentTime: state.value,
               locale: LocaleType.jp,
               onConfirm: (value) {
-                _dateTimeState = value;
-                state.didChange(Anime.dateFormat(value));
+                state.didChange(
+                  value,
+                );
               },
             );
           },
@@ -57,11 +40,11 @@ class _DateTimePickerFormFieldState extends State<DateTimePickerFormField> {
           subtitle: Stack(
             children: [
               Text(
-                '${state.value}',
+                '${Anime.dateFormat(state.value)}',
               ),
-              if (_errorText() != null)
+              if (_errorText(state.value) != null)
                 Text(
-                  '${_errorText()}',
+                  '${_errorText(state.value)}',
                   style: TextStyle(color: Colors.red),
                 )
             ],

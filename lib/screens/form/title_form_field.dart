@@ -1,4 +1,6 @@
+import 'package:anilife_mobile/models/anime_form.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class TitleFormField extends StatefulWidget {
   const TitleFormField();
@@ -7,7 +9,7 @@ class TitleFormField extends StatefulWidget {
 }
 
 class _TitleFormFieldState extends State<TitleFormField> {
-  final _titleField = TextEditingController();
+  TextEditingController _titleField;
 
   @override
   void dispose() {
@@ -17,8 +19,11 @@ class _TitleFormFieldState extends State<TitleFormField> {
 
   @override
   Widget build(BuildContext context) {
+    final _formModel = Provider.of<AnimeFormModel>(context, listen: false);
     return TextFormField(
-      controller: _titleField,
+      controller: _titleField = TextEditingController(
+        text: _formModel.anime.title,
+      ),
       maxLength: 50,
       decoration: InputDecoration(
         labelText: 'タイトル',
@@ -34,6 +39,9 @@ class _TitleFormFieldState extends State<TitleFormField> {
       ),
       validator: (value) {
         return value.isEmpty ? 'タイトルを入力して下さい' : null;
+      },
+      onSaved: (value) {
+        _formModel.setAnime.title = value;
       },
     );
   }
