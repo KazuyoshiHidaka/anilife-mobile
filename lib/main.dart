@@ -1,4 +1,5 @@
 import 'package:anilife_mobile/models/anime_form.dart';
+import 'package:anilife_mobile/models/firebase.dart';
 import 'package:anilife_mobile/models/my_animes.dart';
 import 'package:anilife_mobile/screens/my_animes_page/my_animes.dart';
 import 'package:anilife_mobile/screens/create_anime_page/create_anime.dart';
@@ -22,6 +23,9 @@ class App extends StatelessWidget {
         Provider(
           create: (context) => AnimeFormModel(),
         ),
+        Provider(
+          create: (context) => Firebase(),
+        )
       ],
       child: DynamicTheme(
         defaultBrightness: Brightness.light,
