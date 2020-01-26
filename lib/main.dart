@@ -1,6 +1,5 @@
 import 'package:anilife_mobile/models/anime_form.dart';
 import 'package:anilife_mobile/models/firebase.dart';
-import 'package:anilife_mobile/models/my_animes.dart';
 import 'package:anilife_mobile/screens/my_animes_page/my_animes.dart';
 import 'package:anilife_mobile/screens/create_anime_page/create_anime.dart';
 import 'package:flutter/material.dart';
@@ -17,13 +16,13 @@ class App extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
-        ChangeNotifierProvider(
-          create: (context) => MyAnimesModel(),
-        ),
+        // ChangeNotifierProvider(
+        //   create: (context) => MyAnimesModel(),
+        // ),
         Provider(
           create: (context) => AnimeFormModel(),
         ),
-        Provider(
+        ChangeNotifierProvider(
           create: (context) => Firebase(),
         )
       ],

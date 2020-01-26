@@ -1,5 +1,5 @@
 import 'package:anilife_mobile/models/anime.dart';
-import 'package:anilife_mobile/models/my_animes.dart';
+import 'package:anilife_mobile/models/firebase.dart';
 import 'package:anilife_mobile/screens/route_arguments.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -30,27 +30,36 @@ class MyAnimeOperations extends StatelessWidget {
   final Anime anime;
   @override
   Widget build(BuildContext context) {
-    final _myAnimesModel = Provider.of<MyAnimesModel>(context, listen: false);
+    final _firebase = Provider.of<Firebase>(context, listen: false);
     return Row(
       children: <Widget>[
         IconButton(
           padding: const EdgeInsets.all(0),
           icon: Icon(Icons.edit),
+          tooltip: '編集',
           onPressed: () {
             Navigator.pushNamed(
               context,
               '/animes/new',
               arguments: RouteArguments(anime),
             );
-            print('edit id: ${anime.id}, title: ${anime.title}');
+            print('edit title: ${anime.title}');
           },
         ),
         IconButton(
           padding: const EdgeInsets.all(0),
           icon: Icon(Icons.clear),
-          onPressed: () {
-            _myAnimesModel.remove(anime.id);
-            print('removed id: ${anime.id}, title: ${anime.title}');
+          tooltip: '削除',
+          onPressed: () async {
+            Scaffold.of(context).showSnackBar(
+              const SnackBar(
+                content: Text('削除しています...'),
+              ),
+            );
+            await _firebase.removeAnime(anime);
+            Scaffold.of(context).hideCurrentSnackBar();
+            // _myAnimesModel.remove(anime.id);
+            print('removed title: ${anime.title}');
           },
         )
       ],

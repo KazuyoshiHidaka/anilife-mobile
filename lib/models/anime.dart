@@ -1,13 +1,14 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
 class Anime {
   Anime({
-    @required this.id,
     @required this.time,
     this.title = '',
     this.notifyTiming = 5,
     this.notifyRepeatIntervalNum = 0,
+    this.id,
   });
   static DateTime newTime = DateTime.utc(
     DateTime.now().year,
@@ -16,8 +17,8 @@ class Anime {
   ).toLocal();
   static const notifyRepeatIntervalList = ['繰り返さない', '毎週', '毎日'];
 
-  int notifyTiming, notifyRepeatIntervalNum, id;
-  String title;
+  int notifyTiming, notifyRepeatIntervalNum;
+  String title, id;
   DateTime time;
 
   static String dateFormat(DateTime dateTime) {
@@ -30,6 +31,26 @@ class Anime {
   String get dateTime => dateFormat(time);
   String get notifyRepeatInterval =>
       notifyRepeatIntervalList[notifyRepeatIntervalNum];
+
+  static Anime
+      convertFireStoreMapToAnimeType // ignore: prefer_constructors_over_static_methods
+      (
+    Map<String, dynamic> data,
+    String animeId,
+  ) {
+    final _timeStamp = data['time'] as Timestamp;
+    final _time = DateTime.parse(_timeStamp.toDate().toString());
+    final _title = data['title'] as String;
+    final _notifyRepeatIntervalNum = data['notifyRepeatIntervalNum'] as int;
+    final _notifyTiming = data['notifyTiming'] as int;
+    return Anime(
+      time: _time,
+      title: _title,
+      notifyRepeatIntervalNum: _notifyRepeatIntervalNum,
+      notifyTiming: _notifyTiming,
+      id: animeId,
+    );
+  }
 }
 
 // class AnimeSchedule {
