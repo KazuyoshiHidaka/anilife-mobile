@@ -30,7 +30,7 @@ class _AnimeFormState extends State<AnimeForm> {
 
 // This class is used in the CreateAnimePage class.
 
-/// This class `declare` AnimeForm class's form fields:
+/// This class declare AnimeForm class's form fields:
 ///
 /// TitleFormField, DateTimePickerFormField, NotifyTimingFormField
 /// and NotifyRepeatIntervalFormField.

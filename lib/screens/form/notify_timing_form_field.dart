@@ -10,9 +10,6 @@ class NotifyTimingFormField extends StatelessWidget {
     final _formModel = Provider.of<AnimeFormModel>(context, listen: false);
     return FormField<int>(
       initialValue: _formModel.setAnime.notifyTiming,
-      onSaved: (value) {
-        _formModel.setAnime.notifyTiming = value;
-      },
       builder: (
         FormFieldState<int> state, // ignore: avoid_types_on_closure_parameters
       ) {
@@ -24,6 +21,8 @@ class NotifyTimingFormField extends StatelessWidget {
               ]),
               hideHeader: true,
               onConfirm: (picker, data) {
+                _formModel.setAnime.notifyTiming = data.first;
+                _formModel.updateNotifyTime();
                 state.didChange(data.first);
               },
             ).showDialog(context);

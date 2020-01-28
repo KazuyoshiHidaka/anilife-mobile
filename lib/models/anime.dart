@@ -1,3 +1,4 @@
+import 'package:anilife_mobile/models/firebase.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
@@ -39,9 +40,12 @@ class Anime {
     String animeId,
   ) {
     final _timeStamp = data['time'] as Timestamp;
-    final _time = DateTime.parse(_timeStamp.toDate().toString());
+    final _time = _timeStamp.toDate();
     final _title = data['title'] as String;
-    final _notifyRepeatIntervalNum = data['notifyRepeatIntervalNum'] as int;
+    final _notifyRepeatIntervalDayCount =
+        data['notifyRepeatIntervalDayCount'] as int;
+    final _notifyRepeatIntervalNum = Firebase.notifyRepeatIntervalDayCounts
+        .indexOf(_notifyRepeatIntervalDayCount);
     final _notifyTiming = data['notifyTiming'] as int;
     return Anime(
       time: _time,

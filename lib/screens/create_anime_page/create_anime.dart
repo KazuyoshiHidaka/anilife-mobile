@@ -1,7 +1,6 @@
 import 'package:anilife_mobile/models/anime.dart';
 import 'package:anilife_mobile/models/anime_form.dart';
 import 'package:anilife_mobile/models/firebase.dart';
-import 'package:anilife_mobile/models/my_animes.dart';
 import 'package:anilife_mobile/screens/form/anime_form.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';

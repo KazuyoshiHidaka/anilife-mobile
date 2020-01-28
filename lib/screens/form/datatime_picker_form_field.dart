@@ -6,8 +6,16 @@ import 'package:provider/provider.dart';
 
 class DateTimePickerFormField extends StatelessWidget {
   const DateTimePickerFormField();
-  String _errorText(DateTime dateTime) {
-    return dateTime.isBefore(DateTime.now()) ? '\n現在より前の日時は指定できません' : null;
+  String _errorText(DateTime notifyTime) {
+    if (notifyTime != null) {
+      return notifyTime.isBefore(
+        DateTime.now(),
+      )
+          ? '\n現在より前の日時に通知を送れません'
+          : null;
+    } else {
+      return null;
+    }
   }
 
   @override
@@ -15,10 +23,9 @@ class DateTimePickerFormField extends StatelessWidget {
     final _formModel = Provider.of<AnimeFormModel>(context, listen: false);
     return FormField<DateTime>(
       initialValue: _formModel.anime.time,
-      validator: _errorText,
-      onSaved: (value) {
-        _formModel.setAnime.time = value;
-      },
+      validator: (value) => _errorText(
+        _formModel.notifyTime,
+      ),
       builder: (state) {
         return ListTile(
           onTap: () async {
@@ -28,6 +35,8 @@ class DateTimePickerFormField extends StatelessWidget {
               currentTime: state.value,
               locale: LocaleType.jp,
               onConfirm: (value) {
+                _formModel.setAnime.time = value;
+                _formModel.updateNotifyTime();
                 state.didChange(
                   value,
                 );
@@ -42,9 +51,9 @@ class DateTimePickerFormField extends StatelessWidget {
               Text(
                 '${Anime.dateFormat(state.value)}',
               ),
-              if (_errorText(state.value) != null)
+              if (_errorText(_formModel.notifyTime) != null)
                 Text(
-                  '${_errorText(state.value)}',
+                  '${_errorText(_formModel.notifyTime)}',
                   style: TextStyle(color: Colors.red),
                 )
             ],

@@ -11,31 +11,64 @@ class MyAnimesList extends StatefulWidget {
 
 class _MyAnimesListState extends State<MyAnimesList> {
   Firebase _firebase;
-  Future<void> signIn() async {
-    await _firebase.setCurrentUser();
-    if (_firebase.currentUser == null) {
-      await _firebase.signUpUser();
-    }
+
+  void _buildDialog(BuildContext context, String message) {
+    showDialog<void>(
+      context: context,
+      barrierDismissible: false,
+      builder: (context) {
+        return AlertDialog(
+          content: Text('$message'),
+          actions: <Widget>[
+            FlatButton(
+              child: const Text('CLOSE'),
+              onPressed: () {
+                Navigator.pop(context, false);
+              },
+            ),
+          ],
+        );
+      },
+    );
   }
 
   @override
   void initState() {
     super.initState();
     _firebase = Provider.of<Firebase>(context, listen: false);
-    signIn();
+    _firebase.messaging.configure(
+      onMessage: (message) async {
+        print('onMessage: $message');
+        final dynamic _title = message['notification']['title'];
+        final dynamic _body = message['notification']['body'];
+        _buildDialog(
+          context,
+          '$_title\n$_body',
+        );
+      },
+    );
   }
 
   @override
   Widget build(BuildContext context) {
-    // final _firebase = Provider.of<Firebase>(context, listen: true);
     return Consumer<Firebase>(
       builder: (context, firebase, child) => FutureBuilder(
-        future: firebase.setMyAnimes(),
+        future: firebase.signUpUser(),
         builder: (context, snapshot) =>
             snapshot.connectionState != ConnectionState.done
-                ? const Center(
-                    child: CircularProgressIndicator(),
-                  )
+                ? Center(
+                    child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      const CircularProgressIndicator(
+                        strokeWidth: 6,
+                      ),
+                      const SizedBox(
+                        height: 10,
+                      ),
+                      Text(firebase.loadingText),
+                    ],
+                  ))
                 : firebase.myAnimes.isEmpty
                     ? const Center(
                         child: Text(
