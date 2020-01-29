@@ -1,4 +1,4 @@
-package com.example.anilife_mobile
+package com.mobile.anilife_mobile
 
 import androidx.annotation.NonNull;
 import io.flutter.embedding.android.FlutterActivity
