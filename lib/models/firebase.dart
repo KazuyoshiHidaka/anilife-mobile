@@ -26,7 +26,11 @@ class Firebase extends ChangeNotifier {
   Future<void> signUpUser() async {
     currentUser ??= await auth.currentUser();
     if (currentUser == null) {
-      currentUser = await auth.signInAnonymously().then((user) => user.user);
+      print('user signin!');
+      currentUser = await auth
+          .signInAnonymously()
+          .then((user) => user.user)
+          .catchError(() => print('catch signin Error!'));
       await messaging.subscribeToTopic('/topics/all');
       await messaging.subscribeToTopic('/topics/${currentUser.uid}');
       print('init currentUser!');
