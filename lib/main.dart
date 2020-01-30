@@ -16,9 +16,6 @@ class App extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
-        // ChangeNotifierProvider(
-        //   create: (context) => MyAnimesModel(),
-        // ),
         Provider(
           create: (context) => AnimeFormModel(),
         ),

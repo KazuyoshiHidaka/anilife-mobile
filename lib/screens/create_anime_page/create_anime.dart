@@ -22,17 +22,10 @@ class CreateAnimePage extends StatelessWidget {
               return IconButton(
                 icon: Icon(Icons.check),
                 tooltip: '登録',
-                onPressed: () async {
+                onPressed: () {
                   if (_formKey.currentState.validate()) {
                     _formKey.currentState.save();
-                    Scaffold.of(context).showSnackBar(
-                      const SnackBar(
-                        content: Text(
-                          '保存しています...',
-                        ),
-                      ),
-                    );
-                    await _firebase.setAnime(_formModel.setAnime);
+                    _firebase.setAnime(_formModel.setAnime);
                     Navigator.pop(context);
                   }
                 },

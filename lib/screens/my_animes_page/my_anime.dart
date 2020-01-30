@@ -50,15 +50,8 @@ class MyAnimeOperations extends StatelessWidget {
           padding: const EdgeInsets.all(0),
           icon: Icon(Icons.clear),
           tooltip: '削除',
-          onPressed: () async {
-            Scaffold.of(context).showSnackBar(
-              const SnackBar(
-                content: Text('削除しています...'),
-              ),
-            );
-            await _firebase.removeAnime(anime);
-            Scaffold.of(context).hideCurrentSnackBar();
-            // _myAnimesModel.remove(anime.id);
+          onPressed: () {
+            _firebase.removeAnime(anime);
             print('removed title: ${anime.title}');
           },
         )

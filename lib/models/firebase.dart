@@ -13,9 +13,7 @@ class Firebase extends ChangeNotifier {
   final FirebaseMessaging messaging = FirebaseMessaging();
   FirebaseUser currentUser;
   String _uid;
-  List<DocumentSnapshot> myAnimes;
-  bool _updateMyAnimes;
-  String loadingText = 'セットアップ中...';
+  Stream<QuerySnapshot> myAnimes;
 
   static const notifyRepeatIntervalDayCounts = [
     0, // 繰り返さない
@@ -24,24 +22,16 @@ class Firebase extends ChangeNotifier {
   ];
 
   Future<void> signUpUser() async {
-    currentUser ??= await auth.currentUser();
-    if (currentUser == null) {
-      print('user signin!');
-      currentUser = await auth
-          .signInAnonymously()
-          .then((user) => user.user)
-          .catchError(() => print('catch signin Error!'));
-      await messaging.subscribeToTopic('/topics/all');
-      await messaging.subscribeToTopic('/topics/${currentUser.uid}');
-      print('init currentUser!');
-    }
+    print('user signin!');
+    currentUser = await auth
+        .signInAnonymously()
+        .then((user) => user.user);
     _uid ??= currentUser.uid;
-    await setMyAnimes();
-    loadingText = 'セットアップ中...';
+    setMyAnimes();
+    notifyListeners();
   }
 
   Future<void> setAnime(Anime anime) async {
-    loadingText = '更新中...';
     final _animesCollection =
         fireStore.collection('users').document(_uid).collection('animes');
     final _animeDocument = anime.id == null
@@ -57,36 +47,28 @@ class Firebase extends ChangeNotifier {
         Duration(minutes: anime.notifyTiming),
       ),
     });
+    await messaging.subscribeToTopic('/topics/${currentUser.uid}');
     await messaging.requestNotificationPermissions(
       const IosNotificationSettings(
           sound: true, badge: true, alert: true, provisional: false),
     );
-    _updateMyAnimes = true;
-    notifyListeners();
   }
 
   Future<void> removeAnime(Anime anime) async {
-    loadingText = '削除中...';
     await fireStore
         .collection('users')
         .document(_uid)
         .collection('animes')
         .document(anime.id)
         .delete();
-    _updateMyAnimes = true;
-    notifyListeners();
   }
 
-  Future<void> setMyAnimes() async {
-    if (myAnimes == null || _updateMyAnimes == true) {
-      myAnimes = await fireStore
+  void setMyAnimes() {
+    myAnimes = fireStore
           .collection('users')
           .document(_uid)
           .collection('animes')
           .orderBy('time')
-          .getDocuments()
-          .then((querySnapShot) => querySnapShot.documents);
-      _updateMyAnimes = false;
-    }
+          .snapshots();
   }
 }
