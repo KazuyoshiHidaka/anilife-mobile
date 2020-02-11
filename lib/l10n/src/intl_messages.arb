@@ -1,0 +1,15 @@
+{
+  "@@locale": "messages",
+  "@@last_modified": "2020-02-12T03:51:36.504084",
+  "hello": "こんにちは",
+  "@hello": {
+    "description": "挨拶",
+    "type": "text",
+    "placeholders": {}
+  },
+  "anime": "アニメ",
+  "@anime": {
+    "type": "text",
+    "placeholders": {}
+  }
+}

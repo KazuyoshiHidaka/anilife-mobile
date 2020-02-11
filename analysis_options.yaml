@@ -1,1 +1,8 @@
 include: package:pedantic_mono/analysis_options.yaml
+
+analyzer:
+  exclude: [lib/l10n/src/**]
+
+linter:
+  rules:
+    prefer_const_literals_to_create_immutables: false
